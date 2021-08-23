@@ -425,7 +425,7 @@ contains
        if (flag == 'define') then
           call ncd_defvar(ncid=ncid, varname=trim(vname), &
                xtype=ncd_double,  dim1name='rtmlon', dim2name='rtmlat', &
-               long_name=trim(lname), units=trim(uname), fill_value=spval)
+               long_name=trim(lname), units=trim(uname))
        else if (flag == 'read' .or. flag == 'write') then
           call ncd_io(varname=trim(vname), data=dfld, dim1name='allrof', &
                ncid=ncid, flag=flag, readvar=readvar)
