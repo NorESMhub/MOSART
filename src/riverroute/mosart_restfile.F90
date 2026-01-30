@@ -396,9 +396,6 @@ contains
                lname = 'runoff (runoff)'
                uname = 'm3/s'
                dfld  => ctl%runoff(:,nt)
-               if (flag == 'read') then
-                  write(6,*)'DEBUG: reading in restart for '//trim(vname)
-               end if
             elseif (nv == 3) then
                vname = 'DVOLRDT_'//trim(ctl%tracer_names(nt))
                lname = 'water volume change in cell (dvolrdt)'

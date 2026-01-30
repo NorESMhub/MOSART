@@ -360,11 +360,12 @@ contains
             if (this%twidth(n) < 0._r8) then
                this%twidth(n) = 0._r8
             end if
-            if ( this%tlen(n) > 0._r8 .and. &
-                 (this%rlenTotal(n)-this%rlen(n))/this%tlen(n) > 1._r8 ) then
-               this%twidth(n) = c_twid(n)*this%twidth(n) * &
-                    ((this%rlenTotal(n)-this%rlen(n))/this%tlen(n))
-            end if
+            if ( this%tlen(n) > 0._r8) then
+               if ((this%rlenTotal(n)-this%rlen(n))/this%tlen(n) > 1._r8 ) then
+                  this%twidth(n) = c_twid(n)*this%twidth(n) * &
+                       ((this%rlenTotal(n)-this%rlen(n))/this%tlen(n))
+               end if
+            endif
             if (this%tlen(n) > 0._r8 .and. this%twidth(n) <= 0._r8) then
                this%twidth(n) = 0._r8
             end if
