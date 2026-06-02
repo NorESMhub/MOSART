@@ -595,7 +595,6 @@ contains
         enddo
       else
         ctl%direct_glc(:,:) = 0._r8
-        ctl%direct_glc(:,:) = 0._r8
       end if
 
       !-----------------------------------------------------
