@@ -719,7 +719,7 @@ contains
     !--------------------------------
 
     call t_startf ('lc_rof_export')
-    call export_fields(gcomp, ctl%begr, ctl%endr, ctl%ntracers_liq, rc)
+    call export_fields(gcomp, ctl%begr, ctl%endr, ctl%ntracers_nonh2o, rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
     call t_stopf ('lc_rof_export')
 
