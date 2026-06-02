@@ -251,7 +251,7 @@ contains
             min_med2mod_areacor_glob, max_med2mod_areacor_glob, 'MOSART'
     end if
 
-    if (fldchk(importState, 'Fgrg_rofl') .and. fldchk(importState, 'Fgrg_rofl')) then
+    if (fldchk(importState, 'Fgrg_rofl') .and. fldchk(importState, 'Fgrg_rofi')) then
       ctl%rof_from_glc = .true.
     else
       ctl%rof_from_glc = .false.

@@ -173,13 +173,9 @@ contains
          write(iulog,'(a)'   ) '   bypass_routing option   = '//trim(bypass_routing_option)
          write(iulog,'(a)'   ) '   qgwl runoff option      = '//trim(qgwl_runoff_option)
          write(iulog,'(a,i2)') '   debug level             = ',debug_mosart
-         if (ctl%ntracers_liq == 1) then
-            write(iulog,'(a)'   ) '   non-water liquid  tracers = none'
-         else
-            write(iulog,'(a)'   ) '   non-water liquid  tracers = '//trim(lnd2rof_tracers)
-         end if
+         write(iulog,'(a)'   ) '   non-h2o liquid  tracers = '//trim(lnd2rof_tracers)
          if (nsrest == nsrStartup .and. finidat /= ' ') then
-           write(iulog,'(a)') '   mosart initial data     = '//trim(finidat)
+           write(iulog,'(a)' ) '   mosart initial data     = '//trim(finidat)
          end if
       endif
 
@@ -598,7 +594,6 @@ contains
           ctl%direct_glc(nr,nt_ice) = dst_direct(nt_ice,cnt)
         enddo
       else
-        ctl%direct_glc(:,:) = 0._r8
         ctl%direct_glc(:,:) = 0._r8
       end if
 

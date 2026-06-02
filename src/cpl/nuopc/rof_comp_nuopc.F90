@@ -66,8 +66,6 @@ module rof_comp_nuopc
   integer                 :: flds_scalar_num = 0
   integer                 :: flds_scalar_index_nx = 0
   integer                 :: flds_scalar_index_ny = 0
-  integer                 :: flds_scalar_index_nextsw_cday = 0._r8
-  integer                 :: nthrds
   integer     , parameter :: debug = 1
   character(*), parameter :: modName =  "(rof_comp_nuopc)"
 
@@ -264,17 +262,6 @@ contains
        call shr_sys_abort(subname//'Need to set attribute ScalarFieldIdxGridNY')
     endif
 
-    call NUOPC_CompAttributeGet(gcomp, name="ScalarFieldIdxNextSwCday", value=cvalue, isPresent=isPresent, isSet=isSet, rc=rc)
-    if (ChkErr(rc,__LINE__,u_FILE_u)) return
-    if (isPresent .and. isSet) then
-       read(cvalue,*) flds_scalar_index_nextsw_cday
-       write(logmsg,*) flds_scalar_index_nextsw_cday
-       call ESMF_LogWrite(trim(subname)//' : flds_scalar_index_nextsw_cday = '//trim(logmsg), ESMF_LOGMSG_INFO)
-       if (ChkErr(rc,__LINE__,u_FILE_u)) return
-    else
-       call shr_sys_abort(subname//'Need to set attribute ScalarFieldIdxNextSwCday')
-    endif
-
     ! Need to run the initial phase of mosart here in order to
     ! get the advertise phase correct
 
@@ -447,15 +434,6 @@ contains
     ! Initialize threading.  If ESMF_AWARE_THREADING is used localPeCount will be
     ! the thread count, otherwise the nthreads attribute is used.
     !----------------------------------------------------------------------------
-
-
-    if(localPeCount == 1) then
-       call NUOPC_CompAttributeGet(gcomp, "nthreads", value=cvalue, rc=rc)
-       if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, line=__LINE__, file=u_FILE_u)) return
-       read(cvalue,*) nthrds
-    else
-       nthrds = localPeCount
-    endif
 
 #if (defined _MEMTRACE)
     if (mainproc) then
@@ -719,7 +697,7 @@ contains
     !--------------------------------
 
     call t_startf ('lc_rof_export')
-    call export_fields(gcomp, ctl%begr, ctl%endr, ctl%ntracers_liq, rc)
+    call export_fields(gcomp, ctl%begr, ctl%endr, ctl%ntracers_nonh2o, rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
     call t_stopf ('lc_rof_export')
 
