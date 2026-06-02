@@ -28,7 +28,6 @@ module mosart_control_type
 
      ! tracers
      integer :: ntracers_tot = -999                  ! number of total tracers
-     integer :: ntracers_liq = -999                  ! number of liquid tracers
      integer :: ntracers_nonh2o = 0                  ! number of liquid non-water tracers from land
      character(len=CS), allocatable :: tracer_names(:)! tracer names from land
      integer :: nt_liq                               ! index of liquid water tracers in tracer_names
